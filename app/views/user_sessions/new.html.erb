@@ -1,2 +1,18 @@
-<h1>UserSessions#new</h1>
-<p>Find me in app/views/user_sessions/new.html.erb</p>
+<% content_for :title do %>login<% end %>
+<% content_for :content do %>
+  <% form_for @user_session do |form| %>
+    <ul>
+      <li>
+        <%= form.label :username, "username" %>
+        <%= form.text_field :username %>
+      </li>
+      <li>
+        <%= form.label :password, "password" %>
+        <%= form.password_field :password %>
+      </li>
+      <li>
+        <%= form.submit "login" %>
+      </li>
+    </ul>
+  <% end %>
+<% end %>

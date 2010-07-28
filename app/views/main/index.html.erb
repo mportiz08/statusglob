@@ -1,1 +1,8 @@
 <% content_for :title do %>social<% end %>
+<% content_for :content do %>
+  <% if current_user %>
+    <h2>welcome back <%= current_user.username %></h2>
+  <% else %>
+    <h2>welcome</h2>
+  <% end %>
+<% end %>

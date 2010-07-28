@@ -14,7 +14,17 @@ class UsersController < ApplicationController
   end
   
   def edit
-    @user = User.find(params[:id])
+    @user = current_user
+  end
+  
+  def update
+    @user = current_user
+    if @user.update_attributes(params[:user])
+      flash[:notice] = "Successfully saved settings."
+      redirect_to root_url
+    else
+      render :action => "edit"
+    end
   end
 
   def show
