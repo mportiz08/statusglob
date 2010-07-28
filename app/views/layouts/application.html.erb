@@ -9,5 +9,11 @@
   <%= yield :head %>
 </head>
 <body>
+  <div id="container">
+    <div id="flash"><%= flash[:notice] %></div>
+    <div id="user-nav"><%= link_to "register", new_user_path %></div>
+    <div id="header"><h1><%= yield :title %></h1></div>
+    <%= yield :content %>
+  </div>
 </body>
 </html>

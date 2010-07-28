@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  # TODO: add root route
+  map.root :controller => "main"
   
   map.login "login", :controller => "user_sessions", :action => "new"
   map.logout "logout", :controller => "user_sessions", :action => "destroy"
