@@ -1,7 +1,12 @@
 <% content_for :title do %>social<% end %>
 <% content_for :content do %>
   <% if current_user %>
-    <h2>welcome back <%= current_user.username %></h2>
+    <h2>welcome <%= current_user.username %></h2>
+    <ul>
+      <% @response.each do |r| %>
+        <li><strong><%= r["user"]["screen_name"] %></strong> <%= r["text"] %></li>
+      <% end %>
+    </ul>
   <% else %>
     <h2>welcome</h2>
   <% end %>
