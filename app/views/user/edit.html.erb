@@ -1,0 +1,27 @@
+<% content_for :title do %>settings<% end %>
+<% content_for :content do %>
+  <% form_for @user do |form| %>
+  <%= form.error_messages %>
+  <ul class="formList">
+    <li>
+      <%= form.label :username, "username" %>
+      <%= form.text_field :username %>
+    </li>
+    <li>
+      <%= form.label :email, "email" %>
+      <%= form.text_field :email %>
+    </li>
+    <li>
+      <%= form.label :password, "password" %>
+      <%= form.password_field :password %>
+    </li>
+    <li>
+      <%= form.label :password_confirmation, "confirm password" %>
+      <%= form.password_field :password_confirmation %>
+    </li>
+    <li>
+      <%= form.submit "update" %>
+    </li>
+  </ul>
+  <% end %>
+<% end %>
