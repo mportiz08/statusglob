@@ -1,6 +1,3 @@
-require 'json'
-require 'oauth'
-
 class MainController < ApplicationController
   def index
     unless current_user.nil? || current_user.twitter_account.nil?
