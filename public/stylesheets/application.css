@@ -38,12 +38,16 @@ html, body {
   height: 100%;
 }
 
-a, a:visited, a:active { color: #333; text-decoration: none; }
+a, a:visited, a:active { color: #000; text-decoration: none; }
 a:hover { color: #000; }
 h1 { font-size: 56px; font-weight: normal; }
 h2 { font-size: 36px; font-weight: normal; }
 h3 { font-size: 24px; font-weight: normal; }
 h4 { font-size: 18px; font-weight: normal; }
+
+li {
+  padding: 15px;
+}
 
 .errorExplanation {
   background-color: #fcdfff;
@@ -61,8 +65,24 @@ h4 { font-size: 18px; font-weight: normal; }
   overflow: hidden;
 }
 
+.author {
+  padding: 5px 0;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.timestamp {
+  font-weight: normal;
+  color: #999999;
+}
+
+.message {
+  font-size: 16px;
+  line-height: 24px;
+}
+
 #container {
-  width: 960px;
+  width: 800px;
   height: 100%;
   margin: 0 auto;
   background-color: #eee;
@@ -82,4 +102,17 @@ h4 { font-size: 18px; font-weight: normal; }
   font-weight: bold;
   padding: 10px;
   border: 2px solid #1b7c2d;
+}
+
+#content {
+  height: 100%;
+}
+
+#content h2, #content h3 {
+  text-align: center;
+}
+
+#content ul {
+  width: 548px;
+  margin: 0 auto;
 }

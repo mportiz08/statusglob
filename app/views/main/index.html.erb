@@ -5,7 +5,7 @@
     <h3>your twitter feed</h3>
     <ul>
       <% @tweets.each do |t| %>
-        <li><strong><%= t.username %></strong> <%= t.content %></li>
+        <li><%= display_tweet(t) %></li>
       <% end %>
     </ul>
   <% end %>
