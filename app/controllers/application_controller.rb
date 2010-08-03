@@ -1,5 +1,6 @@
 # Filters added to this controller apply to all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
+require 'lib/accounts'
 
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
@@ -7,7 +8,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   
   def connect
-    @request_token = consumer(params[:id]).get_request_token(:oauth_callback => "#{root_url}application/twitter_callback")
+    @request_token = Accounts.consumer(params[:id]).get_request_token(:oauth_callback => "#{root_url}application/twitter_callback")
     session[:request_token] = @request_token.token
     session[:request_token_secret] = @request_token.secret
     # send to site to authorize
@@ -16,7 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def twitter_callback
-    consumer = consumer("twitter")
+    consumer = Accounts.consumer("twitter")
     @request_token = OAuth::RequestToken.new(consumer, session[:request_token], session[:request_token_secret])
     # Exchange the request token for an access token.
     @access_token = @request_token.get_access_token(:oauth_verifier => params[:oauth_verifier])
@@ -46,14 +47,14 @@ class ApplicationController < ActionController::Base
   
   private
   
-  def settings(account)
-    settings = YAML::load(File.open("#{Rails.root}/config/accounts.yml"))[account]
-  end
+  #def settings(account)
+  #  settings = YAML::load(File.open("#{Rails.root}/config/accounts.yml"))[account]
+  #end
   
-  def consumer(account)
-    settings = settings(account)
-    OAuth::Consumer.new(settings["consumer_key"], settings["consumer_secret"], {:site=>settings["site"]})
-  end
+  #def consumer(account)
+  #  settings = settings(account)
+  #  OAuth::Consumer.new(settings["consumer_key"], settings["consumer_secret"], {:site=>settings["site"]})
+  #end
   
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
