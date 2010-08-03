@@ -3,7 +3,7 @@ require 'oauth'
 
 class MainController < ApplicationController
   def index
-    if current_user
+    unless current_user.nil? || current_user.twitter_account.nil?
       request = "/statuses/home_timeline.json"
       access = current_user.twitter_account
       access_token = OAuth::AccessToken.new(consumer("twitter"), access.token, access.secret)

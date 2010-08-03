@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   
   def connect
-    @request_token = consumer(params["account"]).get_request_token
+    @request_token = consumer(params[:id]).get_request_token(:oauth_callback => "#{root_url}application/twitter_callback")
     session[:request_token] = @request_token.token
     session[:request_token_secret] = @request_token.secret
     # send to site to authorize
@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
     consumer = consumer("twitter")
     @request_token = OAuth::RequestToken.new(consumer, session[:request_token], session[:request_token_secret])
     # Exchange the request token for an access token.
-    @access_token = @request_token.get_access_token(:oauth_verifier => params[:id])
+    @access_token = @request_token.get_access_token(:oauth_verifier => params[:oauth_verifier])
     @response = consumer.request(:get, "/account/verify_credentials.json", @access_token, { :scheme => :query_string })
     case @response
     when Net::HTTPSuccess
@@ -33,7 +33,8 @@ class ApplicationController < ActionController::Base
       @account = TwitterAccount.new({ :user_id => current_user.id, :token => @access_token.token, :secret => @access_token.secret })
       @account.save!
       # Redirect to the show page
-      redirect_to(current_user)
+      flash[:notice] = "Succesfully connected your twitter account."
+      redirect_to(root_url)
     else
       RAILS_DEFAULT_LOGGER.error "Failed to get user info via OAuth"
       # The user might have rejected this application. Or there was some other error during the request.
