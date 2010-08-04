@@ -38,8 +38,8 @@ html, body {
   height: 100%;
 }
 
-a, a:visited, a:active { color: #000; text-decoration: none; }
-a:hover { color: #000; }
+a, a:visited, a:active, a:hover { color: #000; text-decoration: none; }
+a:hover { text-decoration: underline; }
 h1 { font-size: 56px; font-weight: normal; }
 h2 { font-size: 36px; font-weight: normal; }
 h3 { font-size: 24px; font-weight: normal; }
@@ -77,25 +77,25 @@ li {
 }
 
 .author {
-  padding: 5px 0;
   font-size: 12px;
   font-weight: bold;
 }
 
-.timestamp {
+a.timestamp {
   font-weight: normal;
-  color: #999999;
+  color: #999;
 }
 
 .message {
   font-size: 16px;
   line-height: 24px;
+  padding-top: 5px;
 }
 
 #container {
   width: 800px;
   margin: 0 auto;
-  background-color: #eee;
+  /*background-color: #eee;*/
 }
 
 #user-nav {
@@ -103,7 +103,7 @@ li {
 }
 
 #header {
-  background-color: #ddd;
+  /*background-color: #ddd;*/
 }
 
 #flash {
