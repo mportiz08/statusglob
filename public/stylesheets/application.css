@@ -65,6 +65,17 @@ li {
   overflow: hidden;
 }
 
+.message-left {
+  float: left;
+  width: 48px;
+}
+
+.message-right {
+  float: right;
+  width: 455px;
+  padding-left: 15px;
+}
+
 .author {
   padding: 5px 0;
   font-size: 12px;

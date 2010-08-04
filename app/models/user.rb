@@ -32,6 +32,8 @@ class User < ActiveRecord::Base
   end
   
   def add_tweet(tweet)
-    tweets.create(:username => tweet["user"]["screen_name"], :content => tweet["text"], :date_posted => DateTime.parse(tweet["created_at"]), :site_id => tweet["id"])
+    tweets.create(:username => tweet["user"]["screen_name"], :content => tweet["text"],
+                  :date_posted => DateTime.parse(tweet["created_at"]), :site_id => tweet["id"],
+                  :avatar => tweet["user"]["profile_image_url"])
   end
 end
