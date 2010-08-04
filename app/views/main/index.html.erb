@@ -10,3 +10,12 @@
     </ul>
   <% end %>
 <% end %>
+
+<% content_for :head do %>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#content').hide();
+      $('#content').fadeIn("slow");
+    });
+  </script>
+<% end %>
