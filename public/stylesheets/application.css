@@ -32,7 +32,7 @@ table { border-collapse: collapse; border-spacing: 0; }
 /*******************************************************************************************/
 /*******************************************************************************************/
 html, body {
-  background-color: #fff;
+  background-color: #e7e7e7;
   color: #333;
   font-family: "Helvetica Neue", helvetica, sans-serif;
   height: 100%;
@@ -99,7 +99,7 @@ a.timestamp {
 #container {
   width: 800px;
   margin: 0 auto;
-  /*background-color: #eee;*/
+  background-color: #fff;
 }
 
 #user-nav {
@@ -108,6 +108,7 @@ a.timestamp {
 
 #header {
   /*background-color: #ddd;*/
+  border-bottom: 1px solid #e7e7e7;
 }
 
 #flash {

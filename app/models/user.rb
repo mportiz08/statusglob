@@ -16,16 +16,26 @@ class User < ActiveRecord::Base
     access_token = OAuth::AccessToken.new(Accounts.consumer("twitter"), twitter_account.token, twitter_account.secret)
     
     if tweets.empty?
-      JSON.parse(access_token.get(request).body).each do |tweet|
-        add_tweet(tweet)
+      begin
+        JSON.parse(access_token.get(request).body).each do |tweet|
+          add_tweet(tweet)
+        end
+      rescue JSON::ParserError
+        logger.debug "something bad happened"
+        return false
       end
     else
       # wait at least 5 minutes before bothering twitter again
       if (Time.now - tweets.last.created_at) >= REFRESH_INTERVAL
         # don't bother with tweets we've already seen
         request += "?since_id=#{tweets.last.site_id}"
-        JSON.parse(access_token.get(request).body).each do |tweet|
-          add_tweet(tweet)
+        begin
+          JSON.parse(access_token.get(request).body).each do |tweet|
+            add_tweet(tweet)
+          end
+        rescue JSON::ParserError
+          logger.debug "something bad happened"
+          return false
         end
       end
     end
