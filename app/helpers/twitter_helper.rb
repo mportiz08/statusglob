@@ -6,6 +6,7 @@ module TwitterHelper
                <div class=\"message\">#{tweet.content}</div>
              </div>
              <div class=\"clear\">"
+    link_usernames(@html)
     auto_link(@html, :all, :target => '_blank')
   end
   
@@ -13,9 +14,9 @@ module TwitterHelper
   
   def display_avatar(tweet)
     if tweet.avatar.nil?
-      link_to(image_tag("temp/default.jpg"), "http://twitter.com/#{tweet.username}", { :target => "_blank" })
+      link_to(image_tag("temp/default.jpg", { :width => 48, :height => 48}), "http://twitter.com/#{tweet.username}", { :target => "_blank" })
     else
-      link_to(image_tag(tweet.avatar), "http://twitter.com/#{tweet.username}", { :target => "_blank" })
+      link_to(image_tag(tweet.avatar, { :width => 48, :height => 48}), "http://twitter.com/#{tweet.username}", { :target => "_blank" })
     end
   end
   
@@ -25,5 +26,9 @@ module TwitterHelper
   
   def get_timestamp(tweet)
     link_to("said #{time_ago_in_words(tweet.date_posted)} ago", "http://twitter.com/#{tweet.username}/status/#{tweet.site_id}", { :class => "timestamp", :target => "_blank" })
+  end
+  
+  def link_usernames(html)
+    html.gsub!(/@([a-z0-9_]+)/i, link_to("@\\1", "http://twitter.com/\\1", { :target => "_blank" }))
   end
 end
