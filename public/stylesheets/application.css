@@ -111,6 +111,10 @@ a.timestamp {
   border-bottom: 1px solid #e7e7e7;
 }
 
+#title {
+  text-align: center;
+}
+
 #flash {
   background-color: #6ff888;
   color: #1b7c2d;
@@ -121,10 +125,6 @@ a.timestamp {
 
 #content {
   height: 100%;
-}
-
-#content h2, #content h3 {
-  text-align: center;
 }
 
 #content ul {
