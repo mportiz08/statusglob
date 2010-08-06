@@ -1,5 +1,5 @@
 <% content_for :title do %>
-  <h2>welcome <%= current_user.username if current_user %></h2>
+  <h2>welcome <%= link_to(current_user.username, current_user) if current_user %></h2>
   <% if current_user && current_user.twitter_account %>
     <h3>(here's your twitter feed)</h3>
   <% end %>
@@ -13,13 +13,4 @@
       <% end %>
     </ul>
   <% end %>
-<% end %>
-
-<% content_for :head do %>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $('#content').hide();
-      $('#content').fadeIn("slow");
-    });
-  </script>
 <% end %>
