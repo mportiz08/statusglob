@@ -49,10 +49,6 @@ li {
   padding: 15px;
 }
 
-li:hover {
-  background-color: #efffff;
-}
-
 .errorExplanation {
   background-color: #fcdfff;
   border: 1px solid #800517;
@@ -111,6 +107,7 @@ a.timestamp {
   border-bottom: 1px solid #e7e7e7;
   padding-bottom: 15px;
   background-color: #fff;
+  padding: 15px;
 }
 
 #title {
@@ -128,6 +125,7 @@ a.timestamp {
 #content {
   height: 100%;
   background-color: #fff;
+  min-height: 400px;
 }
 
 #content ul {
@@ -135,11 +133,24 @@ a.timestamp {
   margin: 0 auto;
 }
 
-#overlay {
-  background: #000 url("/images/overlay.png") repeat-x;
-  position: absolute;
-  left: 0px;
-  bottom: 0px;
-  width: 100%;
-  height: 50px;
+#content li {
+  border-bottom: 1px solid #fff;
+}
+
+#content li:hover {
+  border-bottom: 1px solid #e7e7e7;
+}
+
+#layout-top {
+  width: 800px;
+  height: 60px;
+  margin: 0 auto;
+  background: transparent url("/images/layout-top.png") no-repeat;
+}
+
+#layout-bottom {
+  width: 800px;
+  height: 60px;
+  margin: 0 auto;
+  background: transparent url("/images/layout-bottom.png") no-repeat;
 }

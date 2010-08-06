@@ -9,9 +9,10 @@
   <%= yield :head %>
 </head>
 <body>
+  <div id="layout-top"></div>
   <div id="container">
-    <div id="user-nav"><%= link_to "home", root_url %> | <%= render :partial => "shared/user_nav" %></div>
     <div id="header">
+      <div id="user-nav"><%= link_to "home", root_url %> | <%= render :partial => "shared/user_nav" %></div>
       <h1>social</h1>
       <div id="title"><h2><%= yield :title %></h2></div>
     </div>
@@ -20,5 +21,6 @@
       <%= yield :content %>
     </div>
   </div>
+  <div id="layout-bottom"></div>
 </body>
 </html>
