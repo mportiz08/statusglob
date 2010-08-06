@@ -1,16 +1,20 @@
 <% content_for :title do %>
   <h2>welcome <%= link_to(current_user.username, current_user) if current_user %></h2>
-  <% if current_user && current_user.twitter_account %>
-    <h3>(here's your twitter feed)</h3>
-  <% end %>
 <% end %>
 
 <% content_for :content do %>
-  <% unless current_user.nil? || current_user.twitter_account.nil? %>  
-    <ul>
+  <% if current_user %>
+    <% unless current_user.twitter_account.nil? %>
+      <ul id="tweets">
       <% @tweets.each do |t| %>
         <li><%= display_tweet(t) %></li>
       <% end %>
     </ul>
+    <% end %>
+  <% else %>
+    <div id="splash">
+      <%= link_to("sign up", new_user_path, { :id => "button-signup" }) %>
+      <%= link_to("login", login_path, { :id => "button-login" }) %>
+    </div>
   <% end %>
 <% end %>

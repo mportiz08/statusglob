@@ -115,8 +115,8 @@ a.timestamp {
 }
 
 #flash {
-  background-color: #6ff888;
-  color: #1b7c2d;
+  background-color: #71b140;
+  color: #fff;
   font-weight: bold;
   padding: 10px;
   border: 2px solid #1b7c2d;
@@ -126,6 +126,7 @@ a.timestamp {
   height: 100%;
   background-color: #fff;
   min-height: 400px;
+  text-align: center;
 }
 
 #content ul {
@@ -133,12 +134,45 @@ a.timestamp {
   margin: 0 auto;
 }
 
-#content li {
+#tweets li {
   border-bottom: 1px solid #fff;
 }
 
-#content li:hover {
+#tweets li:hover {
   border-bottom: 1px solid #e7e7e7;
+}
+
+#splash {
+  padding-top: 133px;
+}
+
+#splash a {
+  width: 211px;
+  height: 47px;
+  padding: 10px 0;
+  display: inline-block;
+  background: transparent url("/images/button.png") no-repeat;
+  color: #fff;
+  font-size: 36px;
+  text-decoration: none;
+}
+
+#button-signup {
+  /*background: transparent url("/images/button-signup.png") no-repeat;*/
+  margin-right: 25px;
+}
+
+#button-login {
+  /*background: transparent url("/images/button-login.png") no-repeat;*/
+  margin-left: 25px;
+}
+
+#footer {
+  background-color: #fff;
+  border-top: 1px solid #e7e7e7;
+  padding: 15px 0px;
+  text-align: center;
+  font-size: 12px;
 }
 
 #layout-top {
