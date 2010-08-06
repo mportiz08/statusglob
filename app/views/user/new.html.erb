@@ -5,7 +5,7 @@
   <ul class="formList">
     <li>
       <%= form.label :username, "username" %><br />
-      <%= form.text_field :username %>
+      <%= form.text_field :username, { :class => "autofocus" } %>
     </li>
     <li>
       <%= form.label :email, "email" %><br />
@@ -24,4 +24,12 @@
     </li>
   </ul>
   <% end %>
+<% end %>
+
+<% content_for :head do %>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.autofocus:first').focus();
+    });
+  </script>
 <% end %>

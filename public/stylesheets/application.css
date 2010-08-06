@@ -126,7 +126,6 @@ a.timestamp {
   height: 100%;
   background-color: #fff;
   min-height: 400px;
-  text-align: center;
 }
 
 #content ul {
@@ -144,6 +143,7 @@ a.timestamp {
 
 #splash {
   padding-top: 133px;
+  text-align: center;
 }
 
 #splash a {
@@ -158,12 +158,10 @@ a.timestamp {
 }
 
 #button-signup {
-  /*background: transparent url("/images/button-signup.png") no-repeat;*/
   margin-right: 25px;
 }
 
 #button-login {
-  /*background: transparent url("/images/button-login.png") no-repeat;*/
   margin-left: 25px;
 }
 

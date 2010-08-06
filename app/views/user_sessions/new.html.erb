@@ -1,10 +1,11 @@
 <% content_for :title do %>login<% end %>
+
 <% content_for :content do %>
   <% form_for @user_session do |form| %>
     <ul>
       <li>
         <%= form.label :username, "username" %>
-        <%= form.text_field :username %>
+        <%= form.text_field :username, { :class => "autofocus" } %>
       </li>
       <li>
         <%= form.label :password, "password" %>
@@ -15,4 +16,12 @@
       </li>
     </ul>
   <% end %>
+<% end %>
+
+<% content_for :head do %>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.autofocus:first').focus();
+    });
+  </script>
 <% end %>
