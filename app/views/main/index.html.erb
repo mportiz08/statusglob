@@ -13,8 +13,21 @@
     <% end %>
   <% else %>
     <div id="splash">
-      <%= link_to("sign up", new_user_path, { :id => "button-signup" }) %>
-      <%= link_to("login", login_path, { :id => "button-login" }) %>
+      <p>
+        <%= link_to(image_tag("icon-bw_facebook.png"), "http://facebook.com") %>
+        <%= link_to(image_tag("icon-bw_twitter.png"), "http://twitter.com") %>
+        <%= link_to(image_tag("icon-bw_lastfm.png"), "http://last.fm") %>
+        <%= link_to(image_tag("icon-bw_digg.png"), "http://digg.com") %>
+        <%= link_to(image_tag("icon-bw_delicious.png"), "http://delicious.com") %>
+        <%= link_to(image_tag("icon-bw_flickr.png"), "http://flickr.com") %>
+      </p>
+      <p id="description">
+        To get started, sign up or login and connect your social media accounts. Then enjoy the simplicity of social.
+      </p>
+      <p id="buttons">
+        <%= link_to("sign up", new_user_path, { :id => "button-signup" }) %>
+        <%= link_to("login", login_path, { :id => "button-login" }) %>
+      </p>
     </div>
   <% end %>
 <% end %>

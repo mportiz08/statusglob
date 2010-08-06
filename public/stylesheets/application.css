@@ -49,6 +49,11 @@ li {
   padding: 15px;
 }
 
+p {
+  margin: 25px 0;
+  padding: 0 25px;
+}
+
 .errorExplanation {
   background-color: #fcdfff;
   border: 1px solid #800517;
@@ -110,6 +115,11 @@ a.timestamp {
   padding: 15px;
 }
 
+#header a {
+  color: #333;
+  text-decoration: none;
+}
+
 #title {
   text-align: center;
 }
@@ -141,20 +151,35 @@ a.timestamp {
   border-bottom: 1px solid #e7e7e7;
 }
 
-#splash {
-  padding-top: 133px;
-  text-align: center;
+#description {
+  margin: 50px 0;
 }
 
-#splash a {
-  width: 211px;
-  height: 47px;
-  padding: 10px 0;
+#splash {
+  padding-top: 25px;
+  text-align: center;
+  height: 375px;
+  font-size: 24px;
+}
+
+#splash img {
+  margin: 0 15px;
+}
+
+#buttons a {
+  width: 250px;
+  height: 40px;
+  padding: 30px 0;
   display: inline-block;
   background: transparent url("/images/button.png") no-repeat;
-  color: #fff;
+  color: #e7e7e7;
   font-size: 36px;
   text-decoration: none;
+}
+
+#buttons a:hover {
+  background: transparent url("/images/button-hover.png") no-repeat;
+  color: #fff;
 }
 
 #button-signup {

@@ -6,8 +6,8 @@ $(document).ready(function() {
 
 function init() {
   // fade in main content
-  $('#content ul').hide();
-  $('#content ul').fadeIn("slow");
+  $('#title, #content ul, #splash').hide();
+  $('#title, #content ul, #splash').fadeIn("slow");
   
   // fade out flash messages
   setTimeout(fadeNotification, 3000);
