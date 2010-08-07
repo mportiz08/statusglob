@@ -162,6 +162,10 @@ a.timestamp {
   font-size: 24px;
 }
 
+#splash p {
+  line-height: 36px;
+}
+
 #splash img {
   margin: 0 15px;
 }
@@ -200,14 +204,14 @@ a.timestamp {
 
 #layout-top {
   width: 800px;
-  height: 60px;
+  height: 30px;
   margin: 0 auto;
   background: transparent url("/images/layout-top.png") no-repeat;
 }
 
 #layout-bottom {
   width: 800px;
-  height: 60px;
+  height: 30px;
   margin: 0 auto;
   background: transparent url("/images/layout-bottom.png") no-repeat;
 }

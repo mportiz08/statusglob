@@ -2,7 +2,7 @@ module TwitterHelper
   def display_tweet(tweet)
     @html = "<div class=\"message-left\">#{display_avatar(tweet)}</div>
              <div class=\"message-right\">
-               <div class=\"author\">#{link_to(image_tag("icon_twitter.png"), "http://twitter.com", { :target => "_blank" })}&nbsp;&nbsp;#{get_profile_link(tweet)}&nbsp;#{get_timestamp(tweet)}</div>
+               <div class=\"author\">#{link_to(image_tag("icon_twitter_small.png"), "http://twitter.com", { :target => "_blank" })}&nbsp;&nbsp;#{get_profile_link(tweet)}&nbsp;#{get_timestamp(tweet)}</div>
                <div class=\"message\">#{tweet.content}</div>
              </div>
              <div class=\"clear\">"
