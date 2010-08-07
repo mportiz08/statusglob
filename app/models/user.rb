@@ -9,6 +9,10 @@ class User < ActiveRecord::Base
   has_one :twitter_account
   has_many :tweets
   
+  def twitter?
+    !twitter_account.nil?
+  end
+  
   def update_tweets
     return if twitter_account.nil?
     

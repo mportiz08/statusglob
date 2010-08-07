@@ -75,6 +75,11 @@ p {
   width: 48px;
 }
 
+#connections .message-left {
+  width: 32px;
+  height: 32px;
+}
+
 .message-right {
   float: right;
   width: 455px;
@@ -86,7 +91,7 @@ p {
   font-weight: bold;
 }
 
-a.timestamp {
+.timestamp {
   font-weight: normal;
   color: #999;
 }
@@ -143,11 +148,15 @@ a.timestamp {
   margin: 0 auto;
 }
 
-#tweets li {
+#content h3 {
+  padding: 25px;
+}
+
+#tweets li, #connections li {
   border-bottom: 1px solid #fff;
 }
 
-#tweets li:hover {
+#tweets li:hover, #connections li:hover {
   border-bottom: 1px solid #e7e7e7;
 }
 
@@ -215,3 +224,6 @@ a.timestamp {
   margin: 0 auto;
   background: transparent url("/images/layout-bottom.png") no-repeat;
 }
+
+/* /connect css */
+.connected { color: #008000; }

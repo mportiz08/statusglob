@@ -1,7 +1,7 @@
 require 'oauth'
 require 'yaml'
 
-class UserController < ApplicationController
+class UsersController < ApplicationController
   def new
     @user = User.new
   end

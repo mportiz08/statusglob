@@ -1,4 +1,10 @@
 class ConnectController < ApplicationController
+  before_filter :require_user
+  
+  def index
+  
+  end
+  
   def twitter
     if params[:id].eql?("callback")
       twitter_callback()

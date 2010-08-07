@@ -5,7 +5,6 @@ ActionController::Routing::Routes.draw do |map|
   map.logout "logout", :controller => "user_sessions", :action => "destroy"
   
   map.resources :user_sessions
-  map.resources :user
   map.resources :users
   
   map.connect ':controller/:action/:id'
