@@ -3,6 +3,6 @@ module ApplicationHelper
   include TwitterHelper
   
   def app_name
-    "social *"
+    "status *"
   end
 end
