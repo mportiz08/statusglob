@@ -7,11 +7,16 @@ REFRESH_INTERVAL = 300 # 5 minutes in seconds
 class User < ActiveRecord::Base
   acts_as_authentic
   has_one :twitter_account
+  has_one :facebook_account
   has_many :tweets
   has_many :statuses
   
   def twitter?
     !twitter_account.nil?
+  end
+  
+  def facebook?
+    !facebook_account.nil?
   end
   
   def update_tweets

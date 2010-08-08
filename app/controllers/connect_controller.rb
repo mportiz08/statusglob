@@ -6,14 +6,50 @@ class ConnectController < ApplicationController
   end
   
   def twitter
-    if params[:id].eql?("callback")
-      twitter_callback()
-    else
-      twitter_request()
-    end
+    (params[:id].eql?("callback")) ? twitter_callback() : twitter_request()
+  end
+  
+  def facebook
+    (params[:id].eql?("callback")) ? facebook_callback() : facebook_request()
   end
   
   private
+  
+  def settings(account)
+    settings = YAML::load(File.open("#{Rails.root}/config/accounts.yml"))[account]
+  end
+  
+  def consumer(account)
+    settings = settings(account)
+    OAuth::Consumer.new(settings["consumer_key"], settings["consumer_secret"], {:site=>settings["site"]})
+  end
+  
+  def facebook_request
+    settings = settings("facebook")
+    redirect_to "#{settings["site"]}/oauth/authorize?client_id=#{settings["app_id"]}&redirect_uri=#{root_url}connect/facebook/callback&scope=read_stream"
+  end
+  
+  def facebook_callback
+    if params[:code].nil?
+      flash[:error] = "error"
+      redirect_to :action => "index"
+      return
+    end
+    
+    settings = settings("facebook")
+    url = URI.parse("#{settings["site"]}/oauth/access_token?client_id=#{settings["app_id"]}&redirect_uri=#{root_url}connect/facebook/callback&client_secret=#{settings["app_secret"]}&code=#{CGI::escape(params[:code])}")
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = (url.scheme == "https")
+    tmp_url = "#{url.path}?#{url.query}"
+    request = Net::HTTP::Get.new(tmp_url)
+    response = http.request(request)
+    
+    access_token = CGI::escape(response.body.split("=")[1].split("&")[0])
+    @account = FacebookAccount.new({ :user_id => current_user.id, :token => access_token, :secret => "" })
+    @account.save!
+    flash[:notice] = "Successfully connected your facebook account."
+    redirect_to root_url
+  end
   
   def twitter_request
     @request_token = consumer("twitter").get_request_token(:oauth_callback => "#{root_url}connect/twitter/callback")

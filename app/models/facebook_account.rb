@@ -1,4 +1,4 @@
 class FacebookAccount < ActiveRecord::Base
-  validates_presence_of :user_id, :token, :secret
+  validates_presence_of :user_id, :token
   belongs_to :user
 end
