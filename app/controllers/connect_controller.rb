@@ -37,7 +37,7 @@ class ConnectController < ApplicationController
     request = Net::HTTP::Get.new(tmp_url)
     response = http.request(request)
     
-    access_token = CGI::escape(response.body.split("=")[1].split("&")[0])
+    access_token = response.body.split("=")[1].split("&")[0]
     @account = FacebookAccount.new({ :user_id => current_user.id, :token => access_token, :secret => "" })
     @account.save!
     flash[:notice] = "Successfully connected your facebook account."

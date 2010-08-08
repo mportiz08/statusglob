@@ -1,6 +1,8 @@
 require 'oauth'
 require 'json'
+require 'open-uri'
 require 'lib/accounts'
+require 'ap'
 
 REFRESH_INTERVAL = 300 # 5 minutes in seconds
 
@@ -52,8 +54,54 @@ class User < ActiveRecord::Base
   end
   
   def add_tweet(tweet)
-    tweets.create(:username => tweet["user"]["screen_name"], :content => tweet["text"],
-                  :date_posted => DateTime.parse(tweet["created_at"]), :site_id => tweet["id"],
+    tweets.create(:username => tweet["user"]["screen_name"],
+                  :content => tweet["text"],
+                  :date_posted => DateTime.parse(tweet["created_at"]),
+                  :site_id => tweet["id"],
                   :avatar => tweet["user"]["profile_image_url"])
+  end
+  
+  def update_statuses
+    return if facebook_account.nil?
+    
+    if statuses.empty?
+      feed = get_fb_feed
+      feed.each do |item|
+        if item["type"] == "status"
+          add_status(item)
+        end
+      end
+    else
+      # wait at least 5 minutes before bothering facebook again
+      if (Time.now - tweets.last.created_at) >= REFRESH_INTERVAL
+        feed = get_fb_feed
+        feed.each do |item|
+          if item["type"] == "status"
+            add_status(item)
+          end
+        end
+      end
+    end
+  end
+  
+  def add_status(status)
+    statuses.create(:name => status["from"]["name"],
+                    :name_id => status["from"]["id"],
+                    :message => status["message"],
+                    :date_posted => DateTime.parse(status["created_time"]),
+                    :site_id => status["id"],
+                    :link => status["actions"].first["link"],
+                    :avatar => "http://graph.facebook.com/#{status["from"]["id"]}/picture")
+  end
+  
+  private
+  
+  def get_fb_feed
+    url = URI.parse("https://graph.facebook.com/me/home?access_token=#{CGI::escape(facebook_account.token)}")
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = (url.scheme == "https")
+    tmp_url = "#{url.path}?#{url.query}"
+    request = Net::HTTP::Get.new(tmp_url)
+    response = JSON.parse(http.request(request).body)["data"]
   end
 end
