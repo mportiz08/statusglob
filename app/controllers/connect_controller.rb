@@ -1,3 +1,5 @@
+require 'lib/accounts'
+
 class ConnectController < ApplicationController
   before_filter :require_user
   
@@ -15,17 +17,8 @@ class ConnectController < ApplicationController
   
   private
   
-  def settings(account)
-    settings = YAML::load(File.open("#{Rails.root}/config/accounts.yml"))[account]
-  end
-  
-  def consumer(account)
-    settings = settings(account)
-    OAuth::Consumer.new(settings["consumer_key"], settings["consumer_secret"], {:site=>settings["site"]})
-  end
-  
   def facebook_request
-    settings = settings("facebook")
+    settings = Accounts.settings("facebook")
     redirect_to "#{settings["site"]}/oauth/authorize?client_id=#{settings["app_id"]}&redirect_uri=#{root_url}connect/facebook/callback&scope=read_stream"
   end
   
@@ -36,7 +29,7 @@ class ConnectController < ApplicationController
       return
     end
     
-    settings = settings("facebook")
+    settings = Accounts.settings("facebook")
     url = URI.parse("#{settings["site"]}/oauth/access_token?client_id=#{settings["app_id"]}&redirect_uri=#{root_url}connect/facebook/callback&client_secret=#{settings["app_secret"]}&code=#{CGI::escape(params[:code])}")
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = (url.scheme == "https")
@@ -52,7 +45,7 @@ class ConnectController < ApplicationController
   end
   
   def twitter_request
-    @request_token = consumer("twitter").get_request_token(:oauth_callback => "#{root_url}connect/twitter/callback")
+    @request_token = Accounts.consumer("twitter").get_request_token(:oauth_callback => "#{root_url}connect/twitter/callback")
     session[:request_token] = @request_token.token
     session[:request_token_secret] = @request_token.secret
     # send to site to authorize
@@ -61,7 +54,7 @@ class ConnectController < ApplicationController
   end
   
   def twitter_callback
-    consumer = consumer("twitter")
+    consumer = Accounts.consumer("twitter")
     @request_token = OAuth::RequestToken.new(consumer, session[:request_token], session[:request_token_secret])
     # Exchange the request token for an access token.
     @access_token = @request_token.get_access_token(:oauth_verifier => params[:oauth_verifier])
