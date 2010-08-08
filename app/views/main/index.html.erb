@@ -1,5 +1,5 @@
 <% content_for :title do %>
-  <h2>welcome <%= link_to(current_user.username, current_user) if current_user %></h2>
+  welcome <%= current_user.username if current_user %>
 <% end %>
 
 <% content_for :content do %>
