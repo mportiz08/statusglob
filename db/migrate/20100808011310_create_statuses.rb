@@ -1,6 +1,7 @@
 class CreateStatuses < ActiveRecord::Migration
   def self.up
     create_table :statuses do |t|
+      t.integer :user_id
       t.string :site_id
       t.string :name
       t.string :name_id

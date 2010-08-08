@@ -9,9 +9,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100808011310) do
+ActiveRecord::Schema.define(:version => 20100808012414) do
+
+  create_table "facebook_accounts", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "token"
+    t.string   "secret"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "statuses", :force => true do |t|
+    t.integer  "user_id"
     t.string   "site_id"
     t.string   "name"
     t.string   "name_id"
