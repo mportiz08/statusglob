@@ -13,14 +13,14 @@ module FacebookHelper
   
   def facebook_display_avatar(status)
     if status.avatar.nil?
-      link_to(image_tag("temp/default.jpg", { :width => 48, :height => 48}), "http://facebook.com/#{status.name_id}", { :target => "_blank" })
+      link_to(image_tag("temp/default.jpg", { :width => 48, :height => 48}), "http://www.facebook.com/profile.php?id=#{status.name_id}", { :target => "_blank" })
     else
-      link_to(image_tag(status.avatar, { :width => 48, :height => 48}), "http://facebook.com/#{status.name_id}", { :target => "_blank" })
+      link_to(image_tag(status.avatar, { :width => 48, :height => 48}), "http://www.facebook.com/profile.php?id=#{status.name_id}", { :target => "_blank" })
     end
   end
   
   def facebook_get_profile_link(status)
-    link_to(status.name, "http://facebook.com/#{status.name_id}", { :target => "_blank" })
+    link_to(status.name, "http://www.facebook.com/profile.php?id=#{status.name_id}", { :target => "_blank" })
   end
   
   def facebook_get_timestamp(status)
