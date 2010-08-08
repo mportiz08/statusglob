@@ -91,7 +91,7 @@ p {
   font-weight: bold;
 }
 
-.timestamp {
+a.timestamp, a.timestamp:visited {
   font-weight: normal;
   color: #999;
 }

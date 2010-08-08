@@ -6,13 +6,14 @@
   <% if current_user %>
     <% unless current_user.twitter_account.nil? %>
       <ul id="tweets">
-      <% @statuses.each do |s| %>
-        <li><%= display_status(s) %></li>
-      <% end %>
-      <% @tweets.each do |t| %>
-        <li><%= display_tweet(t) %></li>
-      <% end %>
-    </ul>
+        <% @messages.each do |m| %>
+          <% if m.class.name == "Tweet" %>
+            <li><%= display_tweet(m) %></li>
+          <% elsif m.class.name == "Status" %>
+            <li><%= display_status(m) %></li>
+          <% end %>
+        <% end %>
+      </ul>
     <% end %>
   <% else %>
     <div id="splash">
