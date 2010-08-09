@@ -2,7 +2,6 @@ require 'oauth'
 require 'json'
 require 'open-uri'
 require 'lib/accounts'
-require 'ap'
 
 REFRESH_INTERVAL = 300 # 5 minutes in seconds
 
@@ -102,7 +101,6 @@ class User < ActiveRecord::Base
     http.use_ssl = (url.scheme == "https")
     tmp_url = "#{url.path}?#{url.query}"
     request = Net::HTTP::Get.new(tmp_url)
-    ap http.request(request).body
     response = JSON.parse(http.request(request).body)["data"]
   end
 end
