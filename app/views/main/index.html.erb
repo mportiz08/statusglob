@@ -18,12 +18,9 @@
   <% else %>
     <div id="splash">
       <p id="services">
-        <%= link_to(image_tag("icon-bw_facebook.png"), "http://facebook.com", { :title => "facebook"}) %>
-        <%= link_to(image_tag("icon-bw_twitter.png"), "http://twitter.com", { :title => "twitter"}) %>
-        <%= link_to(image_tag("icon-bw_lastfm.png"), "http://last.fm", { :title => "last.fm"}) %>
-        <%= link_to(image_tag("icon-bw_digg.png"), "http://digg.com", { :title => "digg"}) %>
-        <%= link_to(image_tag("icon-bw_delicious.png"), "http://delicious.com", { :title => "delicious"}) %>
-        <%= link_to(image_tag("icon-bw_flickr.png"), "http://flickr.com", { :title => "flickr"}) %>
+        <%= link_to(image_tag("icon_facebook_large.png"), "http://facebook.com") %>
+        <%= link_to(image_tag("icon_twitter_large.png"), "http://twitter.com") %>
+        <%= link_to(image_tag("icon_buzz_large.png"), "http://google.com/buzz") %>
       </p>
       <p id="description">
         To get started, sign up or login and connect your social media accounts. Then enjoy the simplicity of <%= app_name %>.
@@ -34,26 +31,4 @@
       </p>
     </div>
   <% end %>
-<% end %>
-
-<% content_for :head do %>
-  <%= stylesheet_link_tag "tipTip" %>
-  <%= javascript_include_tag "jquery.tipTip" %>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      var origFilename;
-      
-      $('#services img').hover(function() {
-        // change black&white icons to colored icons
-        origFilename = $(this).attr("src");
-        var newFilename = origFilename.replace("-bw", "");
-        $(this).attr("src", newFilename);
-      }, function() {
-        // change colored icons back to black&white
-        $(this).attr("src", origFilename);
-      });
-      
-      $('#services a').tipTip({ defaultPosition: "top", edgeOffset: 15});
-    });
-  </script>
 <% end %>

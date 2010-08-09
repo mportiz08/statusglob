@@ -166,9 +166,8 @@ a.timestamp, a.timestamp:visited {
 }
 
 #splash {
-  padding-top: 25px;
+  padding: 5px 0;
   text-align: center;
-  height: 375px;
   font-size: 24px;
 }
 
