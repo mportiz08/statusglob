@@ -73,7 +73,7 @@ class User < ActiveRecord::Base
       end
     else
       # wait at least 5 minutes before bothering facebook again
-      if (Time.now - tweets.last.created_at) >= REFRESH_INTERVAL
+      if (Time.now - statuses.last.created_at) >= REFRESH_INTERVAL
         feed = get_fb_feed
         feed.each do |item|
           if item["type"] == "status"
@@ -102,6 +102,7 @@ class User < ActiveRecord::Base
     http.use_ssl = (url.scheme == "https")
     tmp_url = "#{url.path}?#{url.query}"
     request = Net::HTTP::Get.new(tmp_url)
+    ap http.request(request).body
     response = JSON.parse(http.request(request).body)["data"]
   end
 end

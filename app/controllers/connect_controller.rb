@@ -19,7 +19,7 @@ class ConnectController < ApplicationController
   
   def facebook_request
     settings = Accounts.settings("facebook")
-    redirect_to "#{settings["site"]}/oauth/authorize?client_id=#{settings["app_id"]}&redirect_uri=#{root_url}connect/facebook/callback&scope=read_stream"
+    redirect_to "#{settings["site"]}/oauth/authorize?client_id=#{settings["app_id"]}&redirect_uri=#{root_url}connect/facebook/callback&scope=read_stream,offline_access"
   end
   
   def facebook_callback
