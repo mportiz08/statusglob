@@ -20,6 +20,11 @@ class User < ActiveRecord::Base
     !facebook_account.nil?
   end
   
+  def buzz?
+    #!buzz_account.nil?
+    false # remove this line after buzz_account model has been created
+  end
+  
   def update_tweets
     return if twitter_account.nil?
     

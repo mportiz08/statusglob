@@ -5,6 +5,7 @@
 <% content_for :content do %>
   <% if current_user %>
     <% unless current_user.twitter_account.nil? %>
+      <%= render :partial => "shared/services" %>
       <ul id="tweets">
         <% @messages.each do |m| %>
           <% if m.class.name == "Tweet" %>

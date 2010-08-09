@@ -227,3 +227,14 @@ a.timestamp, a.timestamp:visited {
 
 /* /connect css */
 .connected { color: #008000; }
+
+#services {
+  text-align: right;
+  padding-top: 5px;
+  padding-right: 15px;
+  font-size: 12px;
+}
+
+#services a {
+  margin-right: 15px;
+}
