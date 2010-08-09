@@ -1,0 +1,10 @@
+<% content_for :title do %>your statuses<% end %>
+
+<% content_for :content do %>
+  <%= render :partial => "shared/services" %>
+  <ul id="messages">
+    <% @statuses.each do |s| %>
+      <li><%= display_status(s) %></li>
+    <% end %>
+  </ul>
+<% end %>

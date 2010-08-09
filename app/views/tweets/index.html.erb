@@ -1,0 +1,10 @@
+<% content_for :title do %>your tweets<% end %>
+
+<% content_for :content do %>
+  <%= render :partial => "shared/services" %>
+  <ul id="messages">
+    <% @tweets.each do |t| %>
+      <li><%= display_tweet(t) %></li>
+    <% end %>
+  </ul>
+<% end %>

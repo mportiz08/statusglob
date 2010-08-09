@@ -6,7 +6,7 @@
   <% if current_user %>
     <% unless current_user.twitter_account.nil? %>
       <%= render :partial => "shared/services" %>
-      <ul id="tweets">
+      <ul id="messages">
         <% @messages.each do |m| %>
           <% if m.class.name == "Tweet" %>
             <li><%= display_tweet(m) %></li>
@@ -18,7 +18,7 @@
     <% end %>
   <% else %>
     <div id="splash">
-      <p id="services">
+      <p>
         <%= link_to(image_tag("icon_facebook_large.png"), "http://facebook.com") %>
         <%= link_to(image_tag("icon_twitter_large.png"), "http://twitter.com") %>
         <%= link_to(image_tag("icon_buzz_large.png"), "http://google.com/buzz") %>
