@@ -136,6 +136,7 @@ a.timestamp, a.timestamp:visited {
   font-weight: bold;
   padding: 10px;
   border: 2px solid #1b7c2d;
+  text-align: center;
 }
 
 #content {
