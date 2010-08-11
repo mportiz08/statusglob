@@ -1,2 +1,9 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<% content_for :title do %><%= @user.username %><% end %>
+
+<% content_for :content do %>
+  <div id="user-profile">
+    <div id="user-profile-avatar"><%= image_tag(@user.gravatar) %></div>
+    <div id="user-profile-info"><h3>registered on <%= @user.registered %></h3></div>
+    <div class="clear"></div>
+  </div>
+<% end %>

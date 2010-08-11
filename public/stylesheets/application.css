@@ -244,3 +244,18 @@ a.timestamp, a.timestamp:visited {
 #services a {
   margin-right: 15px;
 }
+
+#user-profile {
+  padding: 15px;
+}
+
+#user-profile-avatar {
+  width: 200px;
+  height: 200px;
+  float: left;
+}
+
+#user-profile-info {
+  width: 510px;
+  float: right;
+}

@@ -1,6 +1,7 @@
 require 'oauth'
 require 'json'
 require 'open-uri'
+require 'digest/md5'
 require 'lib/accounts'
 
 REFRESH_INTERVAL = 300 # 5 minutes in seconds
@@ -18,6 +19,14 @@ class User < ActiveRecord::Base
   
   def facebook?
     !facebook_account.nil?
+  end
+  
+  def gravatar
+    "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email.downcase)}?s=200&d=mm"
+  end
+  
+  def registered
+    created_at.strftime("%B %d, %Y")
   end
   
   def update_tweets
