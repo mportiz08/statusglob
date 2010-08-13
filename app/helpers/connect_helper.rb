@@ -21,6 +21,17 @@ module ConnectHelper
     </li>"
   end
   
+  def connect_digg(user)
+    "<li id=\"connection-digg\">
+      <div class=\"message-left\">#{digg_icon(user)}</div>
+      <div class=\"message-right\">
+        <div class=\"author\">facebook <span class=\"timestamp\">#{digg_added_text(user)}</span></div>
+        <div class=\"message\">#{digg_connected_text(user)}</div>
+      </div>
+      <div class=\"clear\"></div>
+    </li>"
+  end
+  
   private
   
   # twitter helpers
@@ -47,5 +58,18 @@ module ConnectHelper
   
   def facebook_connected_text(user)
     (user.facebook?) ? "<span class=\"connected\">connected</span>" : "#{link_to("click to connect", :action => "facebook")}"
+  end
+  
+    # digg helpers
+  def digg_icon(user)
+    (user.digg?) ? image_tag("icon_digg.png") : image_tag("icon-bw_digg.png")
+  end
+  
+  def digg_added_text(user)
+    (user.digg?) ? "added #{time_ago_in_words(user.digg_account.created_at)} ago" : "not added"
+  end
+  
+  def digg_connected_text(user)
+    (user.digg?) ? "<span class=\"connected\">connected</span>" : "#{link_to("click to connect", :action => "digg")}"
   end
 end

@@ -1,10 +1,10 @@
-<% content_for :title do %>your twitter feed<% end %>
+<% content_for :title do %>your digg feed<% end %>
 
 <% content_for :content do %>
   <%= render :partial => "shared/services" %>
   <ul id="messages">
-    <% @tweets.each do |t| %>
-      <li><%= display_tweet(t) %></li>
+    <% @stories.each do |s| %>
+      <li><%= display_story(s) %></li>
     <% end %>
   </ul>
 <% end %>

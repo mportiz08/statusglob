@@ -1,4 +1,5 @@
 <div id="services">
   <%= current_user.twitter? ? link_to(image_tag("icon_twitter_small.png"), :controller => "tweets") : image_tag("icon_twitter_small.png") %>
   <%= current_user.facebook? ? link_to(image_tag("icon_facebook_small.png"), :controller => "statuses") : image_tag("icon_facebook_small.png") %>
+  <%= current_user.digg? ? link_to(image_tag("icon_digg_small.png"), :controller => "stories") : image_tag("icon_digg_small.png") %>
 </div>
