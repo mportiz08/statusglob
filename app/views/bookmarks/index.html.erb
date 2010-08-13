@@ -1,0 +1,10 @@
+<% content_for :title do %>your delicious feed<% end %>
+
+<% content_for :content do %>
+  <%= render :partial => "shared/services" %>
+  <ul id="messages">
+    <% @bookmarks.each do |b| %>
+      <li><%= display_bookmark(b) %></li>
+    <% end %>
+  </ul>
+<% end %>

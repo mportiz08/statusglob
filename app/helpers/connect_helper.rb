@@ -25,8 +25,19 @@ module ConnectHelper
     "<li id=\"connection-digg\">
       <div class=\"message-left\">#{digg_icon(user)}</div>
       <div class=\"message-right\">
-        <div class=\"author\">facebook <span class=\"timestamp\">#{digg_added_text(user)}</span></div>
+        <div class=\"author\">digg <span class=\"timestamp\">#{digg_added_text(user)}</span></div>
         <div class=\"message\">#{digg_connected_text(user)}</div>
+      </div>
+      <div class=\"clear\"></div>
+    </li>"
+  end
+  
+  def connect_delicious(user)
+    "<li id=\"connection-delicious\">
+      <div class=\"message-left\">#{delicious_icon(user)}</div>
+      <div class=\"message-right\">
+        <div class=\"author\">delicious <span class=\"timestamp\">#{delicious_added_text(user)}</span></div>
+        <div class=\"message\">#{delicious_connected_text(user)}</div>
       </div>
       <div class=\"clear\"></div>
     </li>"
@@ -60,7 +71,7 @@ module ConnectHelper
     (user.facebook?) ? "<span class=\"connected\">connected</span>" : "#{link_to("click to connect", :action => "facebook")}"
   end
   
-    # digg helpers
+  # digg helpers
   def digg_icon(user)
     (user.digg?) ? image_tag("icon_digg.png") : image_tag("icon-bw_digg.png")
   end
@@ -71,5 +82,18 @@ module ConnectHelper
   
   def digg_connected_text(user)
     (user.digg?) ? "<span class=\"connected\">connected</span>" : "#{link_to("click to connect", :action => "digg")}"
+  end
+  
+  # delicious helpers
+  def delicious_icon(user)
+    (user.delicious?) ? image_tag("icon_delicious.png") : image_tag("icon-bw_delicious.png")
+  end
+  
+  def delicious_added_text(user)
+    (user.delicious?) ? "added #{time_ago_in_words(user.delicious_account.created_at)} ago" : "not added"
+  end
+  
+  def delicious_connected_text(user)
+    (user.delicious?) ? "<span class=\"connected\">connected</span>" : "#{link_to("click to connect", :action => "delicious")}"
   end
 end

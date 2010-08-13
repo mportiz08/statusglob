@@ -102,6 +102,12 @@ a.timestamp, a.timestamp:visited {
   padding-top: 5px;
 }
 
+.tags {
+  font-size: 12px;
+  font-weight: normal;
+  color: #999;
+}
+
 #container {
   width: 740px;
   margin: 0 auto;
