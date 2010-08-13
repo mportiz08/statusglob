@@ -29,6 +29,20 @@ class ConnectController < ApplicationController
     end
   end
   
+  def delicious
+    @delicious_account = DeliciousAccount.new
+  end
+  
+  def delicious_create
+    @delicious_account = DeliciousAccount.new(params[:delicious_account])
+    if @delicious_account.save
+      flash[:notice] = "Successfully connected your Delicious account."
+      redirect_to :action => "index"
+    else
+      redirect_to :action => "delicious"
+    end
+  end
+  
   private
   
   def facebook_request

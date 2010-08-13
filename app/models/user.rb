@@ -12,10 +12,12 @@ class User < ActiveRecord::Base
   has_one :twitter_account
   has_one :facebook_account
   has_one :digg_account
+  has_one :delicious_account
   
   has_many :tweets
   has_many :statuses
   has_many :stories
+  has_many :bookmarks
   
   def twitter?
     !twitter_account.nil?
@@ -27,6 +29,10 @@ class User < ActiveRecord::Base
   
   def digg?
     !digg_account.nil?
+  end
+  
+  def delicious?
+    !delicious_account.nil?
   end
   
   def gravatar
@@ -104,6 +110,18 @@ class User < ActiveRecord::Base
     end
   end
   
+  def update_bookmarks
+    return if delicious_account.nil?
+    
+    if bookmarks.empty?
+      get_delicious_feed
+    else
+      if(Time.now - bookmarks.last.created_at) >= REFRESH_INTERVAL
+        get_delicious_feed
+      end
+    end
+  end
+  
   def add_tweet(tweet)
     tweets.create(:username    => tweet["user"]["screen_name"],
                   :content     => tweet["text"],
@@ -132,6 +150,15 @@ class User < ActiveRecord::Base
                    :date_posted   => Time.at(story["submit_date"]))
   end
   
+  def add_bookmark(bookmark)
+    bookmarks.create(:username    => bookmark["a"],
+                     :description => bookmark["n"],
+                     :title       => bookmark["d"],
+                     :tags        => bookmark["t"].join(", "),
+                     :link        => bookmark["u"],
+                     :date_posted => DateTime.parse(bookmark["dt"]))
+  end
+  
   private
   
   def get_fb_feed
@@ -149,6 +176,15 @@ class User < ActiveRecord::Base
     response = JSON.parse(request)
     response["stories"].each do |story|
       add_story(story)
+    end
+  end
+  
+  def get_delicious_feed
+    url = "http://feeds.delicious.com/v2/json/network/#{delicious_account.username}?count=20"
+    request = open(url, "User-Agent" => "statusglob").read
+    response = JSON.parse(request)
+    response.each do |bookmark|
+      add_bookmark(bookmark)
     end
   end
 end
