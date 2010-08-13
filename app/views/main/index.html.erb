@@ -12,6 +12,8 @@
             <li><%= display_tweet(m) %></li>
           <% elsif m.class.name == "Status" %>
             <li><%= display_status(m) %></li>
+          <% elsif m.class.name == "Story" %>
+            <li><%= display_story(m) %></li>
           <% end %>
         <% end %>
       </ul>

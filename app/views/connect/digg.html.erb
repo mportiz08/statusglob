@@ -1,0 +1,24 @@
+<% content_for :title do %>connect<% end %>
+<% content_for :content do %>
+  <% form_for :digg_account, :url => { :action => "digg_create" } do |form| %>
+  <%= form.error_messages %>
+  <%= form.hidden_field :user_id, { :value => current_user.id } %>
+  <ul class="formList">
+    <li>
+      <%= form.label :username, "digg username" %><br />
+      <%= form.text_field :username, { :class => "autofocus" } %>
+    </li>
+    <li>
+      <%= form.submit "connect" %>
+    </li>
+  </ul>
+  <% end %>
+<% end %>
+
+<% content_for :head do %>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.autofocus:first').focus();
+    });
+  </script>
+<% end %>

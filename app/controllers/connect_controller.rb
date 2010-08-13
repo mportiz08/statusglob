@@ -15,6 +15,20 @@ class ConnectController < ApplicationController
     (params[:id].eql?("callback")) ? facebook_callback() : facebook_request()
   end
   
+  def digg
+    @digg_account = DiggAccount.new
+  end
+  
+  def digg_create
+    @digg_account = DiggAccount.new(params[:digg_account])
+    if @digg_account.save
+      flash[:notice] = "Successfully connected your Digg account."
+      redirect_to :action => "index"
+    else
+      redirect_to :action => "digg"
+    end
+  end
+  
   private
   
   def facebook_request

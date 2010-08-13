@@ -9,7 +9,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100808012414) do
+ActiveRecord::Schema.define(:version => 20100813030512) do
+
+  create_table "digg_accounts", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "username"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "facebook_accounts", :force => true do |t|
     t.integer  "user_id"
@@ -27,6 +34,19 @@ ActiveRecord::Schema.define(:version => 20100808012414) do
     t.string   "message"
     t.string   "link"
     t.string   "avatar"
+    t.datetime "date_posted"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "stories", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "username"
+    t.string   "avatar"
+    t.string   "title"
+    t.string   "description"
+    t.string   "link_digg"
+    t.string   "link_external"
     t.datetime "date_posted"
     t.datetime "created_at"
     t.datetime "updated_at"

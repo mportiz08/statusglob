@@ -8,10 +8,14 @@ REFRESH_INTERVAL = 300 # 5 minutes in seconds
 
 class User < ActiveRecord::Base
   acts_as_authentic
+  
   has_one :twitter_account
   has_one :facebook_account
+  has_one :digg_account
+  
   has_many :tweets
   has_many :statuses
+  has_many :stories
   
   def twitter?
     !twitter_account.nil?
@@ -19,6 +23,10 @@ class User < ActiveRecord::Base
   
   def facebook?
     !facebook_account.nil?
+  end
+  
+  def digg?
+    !digg_account.nil?
   end
   
   def gravatar
@@ -61,14 +69,6 @@ class User < ActiveRecord::Base
     end
   end
   
-  def add_tweet(tweet)
-    tweets.create(:username => tweet["user"]["screen_name"],
-                  :content => tweet["text"],
-                  :date_posted => DateTime.parse(tweet["created_at"]),
-                  :site_id => tweet["id"],
-                  :avatar => tweet["user"]["profile_image_url"])
-  end
-  
   def update_statuses
     return if facebook_account.nil?
     
@@ -92,14 +92,44 @@ class User < ActiveRecord::Base
     end
   end
   
+  def update_stories
+    return if digg_account.nil?
+    
+    if stories.empty?
+      get_digg_feed
+    else
+      if(Time.now - stories.last.created_at) >= REFRESH_INTERVAL
+        get_digg_feed
+      end
+    end
+  end
+  
+  def add_tweet(tweet)
+    tweets.create(:username    => tweet["user"]["screen_name"],
+                  :content     => tweet["text"],
+                  :date_posted => DateTime.parse(tweet["created_at"]),
+                  :site_id     => tweet["id"],
+                  :avatar      => tweet["user"]["profile_image_url"])
+  end
+  
   def add_status(status)
-    statuses.create(:name => status["from"]["name"],
-                    :name_id => status["from"]["id"],
-                    :message => status["message"],
+    statuses.create(:name        => status["from"]["name"],
+                    :name_id     => status["from"]["id"],
+                    :message     => status["message"],
                     :date_posted => DateTime.parse(status["created_time"]),
-                    :site_id => status["id"],
-                    :link => status["actions"].first["link"],
-                    :avatar => "http://graph.facebook.com/#{status["from"]["id"]}/picture")
+                    :site_id     => status["id"],
+                    :link        => status["actions"].first["link"],
+                    :avatar      => "http://graph.facebook.com/#{status["from"]["id"]}/picture")
+  end
+  
+  def add_story(story)
+    stories.create(:username      => story["friends"]["users"].first["name"],
+                   :avatar        => story["friends"]["users"].first["icon"],
+                   :title         => story["title"],
+                   :description   => story["description"],
+                   :link_digg     => story["href"],
+                   :link_external => story["src"],
+                   :date_posted   => Time.at(story["submit_date"]))
   end
   
   private
@@ -110,6 +140,15 @@ class User < ActiveRecord::Base
     http.use_ssl = (url.scheme == "https")
     tmp_url = "#{url.path}?#{url.query}"
     request = Net::HTTP::Get.new(tmp_url)
-    response = JSON.parse(http.request(request).body)["data"]
+    response = JSON.parse(http.request(request).body)["data"] || []
+  end
+  
+  def get_digg_feed
+    url = "http://services.digg.com/1.0/endpoint?method=friend.getDugg&type=json&username=#{digg_account.username}"
+    request = open(url, "User-Agent" => "statusglob").read
+    response = JSON.parse(request)
+    response["stories"].each do |story|
+      add_story(story)
+    end
   end
 end
