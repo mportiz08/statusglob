@@ -128,7 +128,7 @@ class User < ActiveRecord::Base
                    :title         => story["title"],
                    :description   => story["description"],
                    :link_digg     => story["href"],
-                   :link_external => story["src"],
+                   :link_external => story["link"],
                    :date_posted   => Time.at(story["submit_date"]))
   end
   

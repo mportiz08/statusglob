@@ -3,7 +3,7 @@ module DiggHelper
     @html = "<div class=\"message-left\">#{story_display_avatar(story)}</div>
              <div class=\"message-right\">
                <div class=\"author\">#{link_to(image_tag("icon_digg_small.png"), "http://digg.com", { :target => "_blank" })}&nbsp;&nbsp;#{story_get_profile_link(story)}&nbsp;#{story_get_timestamp(story)}</div>
-               <div class=\"message\">#{story.description}</div>
+               <div class=\"message\"><h4>#{link_to(story.title, story.link_external, { :target => "_blank" })}</h4>#{story.description}</div>
              </div>
              <div class=\"clear\">"
     auto_link(@html, :all, :target => '_blank')
