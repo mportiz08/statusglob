@@ -9,7 +9,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100813030512) do
+ActiveRecord::Schema.define(:version => 20100813225036) do
+
+  create_table "bookmarks", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "username"
+    t.string   "title"
+    t.string   "description"
+    t.string   "link"
+    t.string   "tags"
+    t.datetime "date_posted"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "delicious_accounts", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "username"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "digg_accounts", :force => true do |t|
     t.integer  "user_id"
