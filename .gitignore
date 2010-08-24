@@ -1,4 +1,5 @@
 log/*
 accounts.yml
+database.yml
 *.sqlite3
 public/images/temp/*
