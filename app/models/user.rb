@@ -172,19 +172,27 @@ class User < ActiveRecord::Base
   
   def get_digg_feed
     url = "http://services.digg.com/1.0/endpoint?method=friend.getDugg&type=json&username=#{digg_account.username}"
-    request = open(url, "User-Agent" => "statusglob").read
-    response = JSON.parse(request)
-    response["stories"].each do |story|
-      add_story(story)
+    begin
+      request = open(url, "User-Agent" => "statusglob").read
+      response = JSON.parse(request)
+      response["stories"].each do |story|
+        add_story(story)
+      end
+    rescue OpenURI::HTTPError
+      logger.debug "digg might be down"
     end
   end
   
   def get_delicious_feed
     url = "http://feeds.delicious.com/v2/json/network/#{delicious_account.username}?count=20"
-    request = open(url, "User-Agent" => "statusglob").read
-    response = JSON.parse(request)
-    response.each do |bookmark|
-      add_bookmark(bookmark)
+    begin
+      request = open(url, "User-Agent" => "statusglob").read
+      response = JSON.parse(request)
+      response.each do |bookmark|
+        add_bookmark(bookmark)
+      end
+    rescue OpenURI::HTTPError
+      logger.debug "delicious might be down"
     end
   end
 end
