@@ -16,10 +16,10 @@ class MainController < ApplicationController
         @statuses = current_user.statuses.all(:order => "date_posted DESC", :limit => 10)
       end
       
-      if current_user.digg?
-        current_user.update_stories
-        @stories = current_user.stories.all(:order => "date_posted DESC", :limit => 5)
-      end
+      #if current_user.digg?
+      #  current_user.update_stories
+      #  @stories = current_user.stories.all(:order => "date_posted DESC", :limit => 5)
+      #end
       
       if current_user.delicious?
         current_user.update_bookmarks
